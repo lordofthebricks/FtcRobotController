@@ -25,6 +25,7 @@ public class teleop1 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
+        waitForStart();
 
         while (opModeIsActive()){
             robot.Right_Top.setPower(gamepad1.right_stick_y);
