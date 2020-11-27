@@ -23,14 +23,18 @@ public class hardware {
     }
     public void init(HardwareMap ahwMap){
         hwMap = ahwMap;
-        Right_Bottom = hwMap.get(DcMotor.class, "Right_Bottom");
-        Right_Top = hwMap.get(DcMotor.class, "Right_Top");
-        Left_Bottom = hwMap.get(DcMotor.class, "Left_Bottom");
-        Left_Top = hwMap.get(DcMotor.class, "Left_Top");
+        //Right_Bottom = hwMap.get(DcMotor.class, "Right_Bottom");
+        //Right_Top = hwMap.get(DcMotor.class, "Right_Top");
+        //Left_Bottom = hwMap.get(DcMotor.class, "Left_Bottom");
+        //Left_Top = hwMap.get(DcMotor.class, "Left_Top");
         Shooter = hwMap.get(DcMotor.class,"Shooter");
         loader = hwMap.get(DcMotor.class,"Loader");
 
+        Shooter.setPower(0);
+        loader.setPower(0);
 
+        loader.setDirection(DcMotorSimple.Direction.REVERSE);
+        Shooter.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 }
 
