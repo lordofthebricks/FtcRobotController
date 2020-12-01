@@ -28,12 +28,16 @@ public class teleop1 extends LinearOpMode {
 
 
             if (gamepad1.x){
-                robot.Shooter.setPower(0.5);
+                robot.Shooter.setPower(0.8);
+            } else {
+                robot.Shooter.setPower(0);
             }
 
 
             if (gamepad1.a){
                 robot.loader.setPower(.8);
+            } else {
+                robot.loader.setPower(0);
             }
         }
 
