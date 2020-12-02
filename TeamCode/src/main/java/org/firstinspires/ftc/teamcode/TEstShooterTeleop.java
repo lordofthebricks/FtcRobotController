@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class TEstShooterTeleop extends LinearOpMode {
 
 
-            hardware robot = new hardware();
+            TestingHradware robot = new TestingHradware();
             private ElapsedTime runtime = new ElapsedTime();
 
 
@@ -20,10 +20,7 @@ public class TEstShooterTeleop extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()){
-            robot.Right_Top.setPower(gamepad1.right_stick_y);
-            robot.Right_Bottom.setPower(gamepad1.right_stick_y);
-            robot.Left_Top.setPower(gamepad1.left_stick_y);
-            robot.Left_Bottom.setPower(gamepad1.left_stick_y);
+
 
 
             if (gamepad1.x){
