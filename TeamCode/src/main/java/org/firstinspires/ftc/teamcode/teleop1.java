@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.vars;
 
-@TeleOp(name = "GimliTeleopDriverControl")
+@TeleOp(name = "Normal teleop")
 public class teleop1 extends LinearOpMode {
 
 
