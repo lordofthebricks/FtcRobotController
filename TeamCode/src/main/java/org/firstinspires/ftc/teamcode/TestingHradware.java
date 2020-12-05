@@ -3,12 +3,13 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class TestingHradware {
     public DcMotor Shooter;
     public DcMotor loader;
-
+    public Servo Tilty;
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
     public TestingHradware() {
@@ -18,7 +19,7 @@ public class TestingHradware {
         hwMap = ahwMap;
         Shooter = hwMap.get(DcMotor.class,"Shooter");
         loader = hwMap.get(DcMotor.class,"Loader");
-
+        Tilty = hwMap.get(Servo.class,"Tilty");
 
         Shooter.setPower(0);
         loader.setPower(0);
