@@ -35,6 +35,9 @@ public class TEstShooterTeleop extends LinearOpMode {
             } else {
                 robot.loader.setPower(0);
             }
+            if (gamepad1.dpad_up){
+                robot.Tilty.setPosition(.4);
+            }
         }
 
     }
