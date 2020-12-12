@@ -14,12 +14,20 @@ public class Servotesttleop extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         robot.init(hardwareMap);
-
+        double position = 0;
         waitForStart();
         while (opModeIsActive()){
 
             if (gamepad1.a); {
-                
+                robot.Tilty.setPosition(position);
+                telemetry.addData("position of tilty:",position);
+                telemetry.update();
+            }
+            if (gamepad1.dpad_up);{
+                position =+ 0.1;
+            }
+            if (gamepad1.dpad_down); {
+                position =- 0.1;
             }
 
 
