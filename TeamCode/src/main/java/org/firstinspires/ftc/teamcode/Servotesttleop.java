@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name = "SErvoTester",group = "tests")
 public class Servotesttleop extends LinearOpMode {
+
     TestingHradware robot = new TestingHradware();
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -24,10 +25,10 @@ public class Servotesttleop extends LinearOpMode {
                 telemetry.update();
             }
             if (gamepad1.dpad_up);{
-                position =+ 0.1;
+                position = position + 0.1;
             }
             if (gamepad1.dpad_down); {
-                position =- 0.1;
+                position = position - 0.1;
             }
 
 
