@@ -1,28 +1,8 @@
-/*
- * Copyright (c) 2020 OpenFTC Team
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -36,15 +16,30 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-@TeleOp
-public class EasyOpenCVExample extends LinearOpMode
-{
+
+@Autonomous
+public class LOTBAutonomousB1 extends LinearOpMode {
+
+    private static final long SLEEP_10 = 10;
+    private static final long SLEEP_25 = 25;
+    private static final long SLEEP_50 = 50;
+
     OpenCvInternalCamera phoneCam;
     SkystoneDeterminationPipeline pipeline;
+    hardware robot = new hardware();
+    private ElapsedTime runtime = new ElapsedTime();
 
+    /**
+     * Override this method and place your code here.
+     * <p>
+     * Please do not swallow the InterruptedException, as it is used in cases
+     * where the op mode needs to be terminated early.
+     *
+     * @throws InterruptedException
+     */
     @Override
-    public void runOpMode()
-    {
+
+    public void runOpMode() throws InterruptedException {
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.FRONT, cameraMonitorViewId);
@@ -65,18 +60,107 @@ public class EasyOpenCVExample extends LinearOpMode
             }
         });
 
+        robot.init(hardwareMap);
         waitForStart();
+
+        double FORWARD_SPEED = 0.5;
+
+
 
         while (opModeIsActive())
         {
+
+
             telemetry.addData("Analysis", pipeline.getAnalysis());
             telemetry.addData("Position", pipeline.position);
             telemetry.update();
 
+            // Step 1:  Drive forward for 3 seconds
+            robot.Left_Bottom.setPower(FORWARD_SPEED);
+            robot.Right_Bottom.setPower(-FORWARD_SPEED);
+            robot.Right_Top.setPower(-FORWARD_SPEED);
+            robot.Left_Top.setPower(FORWARD_SPEED);
+            runtime.reset();
+            while (opModeIsActive() && (runtime.seconds() < 3.0)) {
+                telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+                telemetry.update();
+            }
+
+            stop();
+
+
+
+
+
             // Don't burn CPU cycles busy-looping in this sample
             sleep(50);
+
+            moveTowardRings();
+            int ringCount = scanRings();
+
+            switch(ringCount)
+            {
+                case 0:
+                    moveTowardsA();
+                    break;
+                case 1:
+                    moveTowardsB();
+                    break;
+                default:
+                    moveTowardsC();
+                    break;
+
+            }
+
+            dropTheGoalie();
+            driveBackToShootingLine();
+            //and if possible..
+            shootRings();
         }
     }
+
+    private void shootRings() {
+
+        //If there is time, shoot the rings; Might have to mix the order of the methods a bit to make it work.
+    }
+
+    private void driveBackToShootingLine() {
+
+        //Drive back to the shooting line (Around the middle of the field;
+        //Also, create If statement to see how far to move back relative to where you are (A box, B box, C box) )
+    }
+
+    private void dropTheGoalie() {
+
+        //Drop the wobbly goal or (if pushing the goal) just do nothing
+    }
+
+    private void moveTowardsC() {
+
+        //Move towards the C box
+    }
+
+    private void moveTowardsB() {
+
+        //Move towards the B box
+    }
+
+    private void moveTowardsA() {
+
+        //Move towards the A box
+    }
+
+    private int scanRings() {
+
+        //Copy the code from the opencv example and make it return 3 ints; 0, 1, 4
+        return 0;
+    }
+
+    private void moveTowardRings() {
+
+        //encoderDriveWithoutTime for around 30 inches
+    }
+
 
     public static class SkystoneDeterminationPipeline extends OpenCvPipeline
     {
@@ -123,7 +207,7 @@ public class EasyOpenCVExample extends LinearOpMode
         int avg1;
 
         // Volatile since accessed by OpMode thread w/o synchronization
-        private volatile RingPosition position = RingPosition.FOUR;
+        private volatile EasyOpenCVExample.SkystoneDeterminationPipeline.RingPosition position = EasyOpenCVExample.SkystoneDeterminationPipeline.RingPosition.FOUR;
 
         /*
          * This function takes the RGB frame, converts to YCrCb,
@@ -157,13 +241,13 @@ public class EasyOpenCVExample extends LinearOpMode
                     BLUE, // The color the rectangle is drawn in
                     2); // Thickness of the rectangle lines
 
-            position = RingPosition.FOUR; // Record our analysis
+            position = EasyOpenCVExample.SkystoneDeterminationPipeline.RingPosition.FOUR; // Record our analysis
             if(avg1 > FOUR_RING_THRESHOLD){
-                position = RingPosition.FOUR;
+                position = EasyOpenCVExample.SkystoneDeterminationPipeline.RingPosition.FOUR;
             }else if (avg1 > ONE_RING_THRESHOLD){
-                position = RingPosition.ONE;
+                position = EasyOpenCVExample.SkystoneDeterminationPipeline.RingPosition.ONE;
             }else{
-                position = RingPosition.NONE;
+                position = EasyOpenCVExample.SkystoneDeterminationPipeline.RingPosition.NONE;
             }
 
             Imgproc.rectangle(
@@ -181,4 +265,5 @@ public class EasyOpenCVExample extends LinearOpMode
             return avg1;
         }
     }
+
 }

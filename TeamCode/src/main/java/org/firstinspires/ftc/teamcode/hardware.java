@@ -13,8 +13,8 @@ public class hardware {
     public DcMotor Right_Top;
     public DcMotor Left_Bottom;
     public DcMotor Left_Top;
-    public DcMotor Shooter;
-    public DcMotor loader;
+    //public DcMotor Shooter;
+    //public DcMotor loader;
 
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
@@ -27,14 +27,14 @@ public class hardware {
         Right_Top = hwMap.get(DcMotor.class, "Right_Top");
         Left_Bottom = hwMap.get(DcMotor.class, "Left_Bottom");
         Left_Top = hwMap.get(DcMotor.class, "Left_Top");
-        Shooter = hwMap.get(DcMotor.class,"Shooter");
-        loader = hwMap.get(DcMotor.class,"Loader");
+        //Shooter = hwMap.get(DcMotor.class,"Shooter");
+        //loader = hwMap.get(DcMotor.class,"Loader");
 
-        Shooter.setPower(0);
-        loader.setPower(0);
+        //Shooter.setPower(0);
+        //loader.setPower(0);
 
-        loader.setDirection(DcMotorSimple.Direction.REVERSE);
-        Shooter.setDirection(DcMotorSimple.Direction.REVERSE);
+        //loader.setDirection(DcMotorSimple.Direction.REVERSE);
+        //Shooter.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 }
 

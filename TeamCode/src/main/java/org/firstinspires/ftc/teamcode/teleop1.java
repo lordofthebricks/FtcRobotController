@@ -3,10 +3,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@TeleOp(name = "GimliTeleopDriverControl")
+@TeleOp(name = "Teleop")
 public class teleop1 extends LinearOpMode {
     static final double     COUNTS_PER_MOTOR_REV    = 1425.2;//356.3 ;    // eg: DC Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
@@ -35,14 +36,82 @@ public class teleop1 extends LinearOpMode {
             robot.Left_Bottom.setPower(gamepad1.left_stick_y);
 
 
+            while (gamepad1.right_stick_x == -1 && gamepad1.right_stick_y == 1) {
+                telemetry.addData("Should be working", "");
+                telemetry.update();
+                //robot.Right_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //robot.Left_Top.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.Left_Top.setPower(.6);
+                robot.Right_Bottom.setPower(.6);
+            }
+            while (gamepad1.right_stick_y == 1 && gamepad1.right_stick_x == -1) {
+                telemetry.addData("Should be working", "");
+                telemetry.update();
+                //robot.Right_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //robot.Left_Top.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.Left_Top.setPower(-.6);
+                robot.Right_Bottom.setPower(-.6);
+            }
+            while (gamepad1.left_stick_x == -1 && gamepad1.right_stick_y == 1) {
+                telemetry.addData("Should be working", "");
+                telemetry.update();
+                //robot.Right_Top.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //robot.Left_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.Left_Bottom.setPower(.6);
+                robot.Right_Top.setPower(.6);
+            }
+            while (gamepad1.left_stick_x == 1 && gamepad1.left_stick_y == 1) {
+                telemetry.addData("Should be working", "");
+                telemetry.update();
+                //robot.Right_Top.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //robot.Left_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.Left_Bottom.setPower(-.6);
+                robot.Right_Top.setPower(-.6);
+            }
+            //This is the Strafe
+            while (gamepad1.right_stick_x == 1) {
+                telemetry.addData("Strafing Should be working", "");
+                telemetry.update();
+                //robot.Right_Top.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //robot.Right_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //robot.Left_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //robot.Left_Top.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.Right_Top.setPower(.6);
+                robot.Right_Bottom.setPower(-.6);
+                robot.Left_Bottom.setPower(.6);
+                robot.Left_Top.setPower(-.6);
+            }
+            //This is the Strafe
+            // --Speeds changed by Coach 12/13/19
+            while (gamepad1.left_stick_x == -1) {
+                telemetry.addData("Strafing Should be working", "");
+                telemetry.update();
+                //robot.Right_Top.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //robot.Right_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //robot.Left_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                //robot.Left_Top.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.Right_Top.setPower(-.6);
+                robot.Right_Bottom.setPower(.6);
+                robot.Left_Bottom.setPower(-.6);
+                robot.Left_Top.setPower(.6);
+
+
+            }
+
+
             if (gamepad1.x){
-                robot.Shooter.setPower(0.5);
+                telemetry.addData("X Should be working", "");
+                telemetry.update();
+                robot.Right_Top.setPower(-.6);
+                robot.Right_Bottom.setPower(.6);
+                robot.Left_Bottom.setPower(-.6);
+                robot.Left_Top.setPower(.6);
             }
 
 
-            if (gamepad1.a){
-                robot.loader.setPower(.8);
-            }
+            //if (gamepad1.a){
+              //  robot.loader.setPower(.8);
+            //}
         }
 
     }
