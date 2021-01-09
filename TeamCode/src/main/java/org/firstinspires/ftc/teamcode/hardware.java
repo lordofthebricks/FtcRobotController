@@ -9,12 +9,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class hardware {
 
-    //public DcMotor Right_Bottom;
-    //public DcMotor Right_Top;
-    //public DcMotor Left_Bottom;
-    //public DcMotor Left_Top;
+    public DcMotor Right_Bottom;
+    public DcMotor Right_Top;
+    public DcMotor Left_Bottom;
+    public DcMotor Left_Top;
     public DcMotor Shooter;
     public DcMotor loader;
+    public Servo Tilty;
 
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
@@ -23,13 +24,13 @@ public class hardware {
     }
     public void init(HardwareMap ahwMap){
         hwMap = ahwMap;
-        //Right_Bottom = hwMap.get(DcMotor.class, "Right_Bottom");
-        //Right_Top = hwMap.get(DcMotor.class, "Right_Top");
-        //Left_Bottom = hwMap.get(DcMotor.class, "Left_Bottom");
-        //Left_Top = hwMap.get(DcMotor.class, "Left_Top");
+        Right_Bottom = hwMap.get(DcMotor.class, "Right_Bottom");
+        Right_Top = hwMap.get(DcMotor.class, "Right_Top");
+        Left_Bottom = hwMap.get(DcMotor.class, "Left_Bottom");
+        Left_Top = hwMap.get(DcMotor.class, "Left_Top");
         Shooter = hwMap.get(DcMotor.class,"Shooter");
         loader = hwMap.get(DcMotor.class,"Loader");
-
+        Tilty = hwMap.get(Servo.class,"Tilty");
 
         Shooter.setPower(0);
         loader.setPower(0);
