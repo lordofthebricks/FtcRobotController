@@ -16,6 +16,7 @@ public class hardware {
     public DcMotor Shooter;
     public DcMotor loader;
     public Servo Tilty;
+    public DcMotor Finger;
 
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
@@ -31,12 +32,15 @@ public class hardware {
         Shooter = hwMap.get(DcMotor.class,"Shooter");
         loader = hwMap.get(DcMotor.class,"Loader");
         Tilty = hwMap.get(Servo.class,"Tilty");
+        Finger = hwMap.get(DcMotor.class,"Finger");
+
 
         Shooter.setPower(0);
         loader.setPower(0);
+        Finger.setPower(0);
 
         loader.setDirection(DcMotorSimple.Direction.REVERSE);
-        Shooter.setDirection(DcMotorSimple.Direction.REVERSE);
+        //Shooter.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 }
 
