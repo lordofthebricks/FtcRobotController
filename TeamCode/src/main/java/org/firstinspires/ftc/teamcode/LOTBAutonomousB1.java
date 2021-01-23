@@ -110,20 +110,26 @@ public class LOTBAutonomousB1 extends LinearOpMode {
 
 
 
-            double moveLength = 33;
+            double moveLength = 29;
             sleep(2000);
 
             switch(ringCount)
             {
                 case 0:
+                    strafeLeft(9);
+                    sleep(500);
                     moveTowards(moveLength);
                     break;
                 case 1:
-                    moveLength = 57;
+                    moveLength = 53;
                     moveTowards(moveLength);
+                    sleep(500);
+                    strafeRight(17);
                     break;
                 default:
-                    moveLength = 85;
+                    moveLength = 75;
+                    strafeLeft(9);
+                    sleep(500);
                     moveTowards(moveLength);
                     break;
 
@@ -137,6 +143,18 @@ public class LOTBAutonomousB1 extends LinearOpMode {
             shootRings();
             stop();
         }
+    }
+
+    private void strafeRight(double moveLength) {
+        telemetry.addData("Strafe Right: ", moveLength);
+        telemetry.update();
+        encoderDriveWithoutTime(0.5, moveLength, -moveLength, moveLength, -moveLength);
+    }
+
+    private void strafeLeft(double moveLength) {
+        telemetry.addData("Strafe Left: ", moveLength);
+        telemetry.update();
+        encoderDriveWithoutTime(0.5, -moveLength, moveLength, -moveLength, moveLength);
     }
 
     private void moveTowards(double moveLength) {
@@ -230,12 +248,12 @@ public class LOTBAutonomousB1 extends LinearOpMode {
             case 1:
                 telemetry.addData("Move Back 25 in", "");
                 telemetry.update();
-                encoderDriveWithoutTime(0.5, 25, 25, 25, 25);
+                encoderDriveWithoutTime(0.5, 20, 20, 20, 20);
                 break;
             default:
                 telemetry.addData("Move Back 53 in", "");
                 telemetry.update();
-                encoderDriveWithoutTime(0.5, 53, 53, 53, 53);
+                encoderDriveWithoutTime(0.5, 45, 45, 45, 45);
                 break;
         }
     }
@@ -268,7 +286,7 @@ public class LOTBAutonomousB1 extends LinearOpMode {
         sleep(2000);
         int avg1 = pipeline.getAnalysis();
 
-        final int FOUR_RING_THRESHOLD = 175;//150;
+        final int FOUR_RING_THRESHOLD = 168;//150;
         final int ONE_RING_THRESHOLD = 150;//135;
 
         int ringCount = 0;
@@ -279,9 +297,21 @@ public class LOTBAutonomousB1 extends LinearOpMode {
             ringCount = 1;
         }
 
+        telemetry.addData("Postition", avg1);
         telemetry.addData("Ring Count:", ringCount);
         telemetry.update();
-        sleep(5000);
+        sleep(2000);
+
+        /*while (opModeIsActive())
+        {
+            telemetry.addData("Analysis", pipeline.getAnalysis());
+            telemetry.addData("Position", pipeline.position);
+            telemetry.update();
+
+            // Don't burn CPU cycles busy-looping in this sample
+            sleep(50);
+        } */
+
         //Copy the code from the opencv example and make it return 3 ints; 0, 1, 4
         return ringCount;
 
@@ -316,12 +346,12 @@ public class LOTBAutonomousB1 extends LinearOpMode {
         /*
          * The core values which define the location and size of the sample regions
          */
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(75,45);
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(75,97);
 
-        static final int REGION_WIDTH = 35;
-        static final int REGION_HEIGHT = 25;
+        static final int REGION_WIDTH = 45;
+        static final int REGION_HEIGHT = 33;
 
-        final int FOUR_RING_THRESHOLD = 175;//150;
+        final int FOUR_RING_THRESHOLD = 170;//150;
         final int ONE_RING_THRESHOLD = 150;//135;
 
         Point region1_pointA = new Point(
