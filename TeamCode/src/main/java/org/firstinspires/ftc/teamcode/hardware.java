@@ -33,6 +33,9 @@ public class hardware {
         //Shooter.setPower(0);
         //loader.setPower(0);
 
+        Right_Top.setDirection(DcMotor.Direction.REVERSE);
+        Right_Bottom.setDirection(DcMotor.Direction.REVERSE);
+
         //loader.setDirection(DcMotorSimple.Direction.REVERSE);
         //Shooter.setDirection(DcMotorSimple.Direction.REVERSE);
     }
