@@ -116,7 +116,7 @@ public class LOTBAutonomousB1 extends LinearOpMode {
             switch(ringCount)
             {
                 case 0:
-                    strafeLeft(9);
+                    strafeLeft(15);
                     sleep(500);
                     moveTowards(moveLength);
                     break;
@@ -128,7 +128,7 @@ public class LOTBAutonomousB1 extends LinearOpMode {
                     break;
                 default:
                     moveLength = 75;
-                    strafeLeft(9);
+                    strafeLeft(15);
                     sleep(500);
                     moveTowards(moveLength);
                     break;
@@ -148,13 +148,13 @@ public class LOTBAutonomousB1 extends LinearOpMode {
     private void strafeRight(double moveLength) {
         telemetry.addData("Strafe Right: ", moveLength);
         telemetry.update();
-        encoderDriveWithoutTime(0.5, moveLength, -moveLength, moveLength, -moveLength);
+        encoderDriveWithoutTime(0.3, moveLength, -moveLength, moveLength, -moveLength);
     }
 
     private void strafeLeft(double moveLength) {
         telemetry.addData("Strafe Left: ", moveLength);
         telemetry.update();
-        encoderDriveWithoutTime(0.5, -moveLength, moveLength, -moveLength, moveLength);
+        encoderDriveWithoutTime(0.3, -moveLength, moveLength, -moveLength, moveLength);
     }
 
     private void moveTowards(double moveLength) {
@@ -181,10 +181,10 @@ public class LOTBAutonomousB1 extends LinearOpMode {
 
 
             // Determine new target position, and pass to motor controller
-            newLeftBottomTarget = robot.Left_Bottom.getCurrentPosition() + (int) (Left_Bottom_Inches * COUNTS_PER_INCH);
-            newRightBottomTarget = robot.Right_Bottom.getCurrentPosition() + (int) (Right_Bottom_Inches * COUNTS_PER_INCH);
-            newRightTopTarget = robot.Right_Top.getCurrentPosition() + (int) (Right_Top_Inches * COUNTS_PER_INCH);
-            newLeftTopTarget = robot.Left_Top.getCurrentPosition() + (int) (Left_Top_Inches * COUNTS_PER_INCH);
+            newLeftBottomTarget = robot.Left_Bottom.getCurrentPosition() + (int) ((Left_Bottom_Inches) * COUNTS_PER_INCH);
+            newRightBottomTarget = robot.Right_Bottom.getCurrentPosition() + (int) ((Right_Bottom_Inches - 0.1) * COUNTS_PER_INCH);
+            newRightTopTarget = robot.Right_Top.getCurrentPosition() + (int) ((Right_Top_Inches - 0.1) * COUNTS_PER_INCH);
+            newLeftTopTarget = robot.Left_Top.getCurrentPosition() + (int) ((Left_Top_Inches) * COUNTS_PER_INCH);
 
             robot.Left_Bottom.setTargetPosition(newLeftBottomTarget);
             robot.Right_Bottom.setTargetPosition(newRightBottomTarget);
@@ -286,7 +286,7 @@ public class LOTBAutonomousB1 extends LinearOpMode {
         sleep(2000);
         int avg1 = pipeline.getAnalysis();
 
-        final int FOUR_RING_THRESHOLD = 168;//150;
+        final int FOUR_RING_THRESHOLD = 167;//150;
         final int ONE_RING_THRESHOLD = 150;//135;
 
         int ringCount = 0;
@@ -346,7 +346,7 @@ public class LOTBAutonomousB1 extends LinearOpMode {
         /*
          * The core values which define the location and size of the sample regions
          */
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(75,97);
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(75,68);
 
         static final int REGION_WIDTH = 45;
         static final int REGION_HEIGHT = 33;
