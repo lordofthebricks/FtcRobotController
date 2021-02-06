@@ -182,8 +182,8 @@ public class LOTBAutonomousB1 extends LinearOpMode {
 
             // Determine new target position, and pass to motor controller
             newLeftBottomTarget = robot.Left_Bottom.getCurrentPosition() + (int) ((Left_Bottom_Inches) * COUNTS_PER_INCH);
-            newRightBottomTarget = robot.Right_Bottom.getCurrentPosition() + (int) ((Right_Bottom_Inches - 0.1) * COUNTS_PER_INCH);
-            newRightTopTarget = robot.Right_Top.getCurrentPosition() + (int) ((Right_Top_Inches - 0.1) * COUNTS_PER_INCH);
+            newRightBottomTarget = robot.Right_Bottom.getCurrentPosition() + (int) ((Right_Bottom_Inches) * COUNTS_PER_INCH);
+            newRightTopTarget = robot.Right_Top.getCurrentPosition() + (int) ((Right_Top_Inches) * COUNTS_PER_INCH);
             newLeftTopTarget = robot.Left_Top.getCurrentPosition() + (int) ((Left_Top_Inches) * COUNTS_PER_INCH);
 
             robot.Left_Bottom.setTargetPosition(newLeftBottomTarget);

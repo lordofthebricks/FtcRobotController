@@ -16,6 +16,7 @@ public class hardware {
     public DcMotor Shooter;
     public DcMotor loader;
     public Servo Tilty;
+    public Servo Tilty2;
     public DcMotor Finger;
 
     HardwareMap hwMap = null;
@@ -32,6 +33,7 @@ public class hardware {
         Shooter = hwMap.get(DcMotor.class,"Shooter");
         loader = hwMap.get(DcMotor.class,"Loader");
         Tilty = hwMap.get(Servo.class,"Tilty");
+        Tilty2 = hwMap.get(Servo.class,"Tilty2");
         Finger = hwMap.get(DcMotor.class,"Finger");
 
 
@@ -39,11 +41,17 @@ public class hardware {
         loader.setPower(0);
         Finger.setPower(0);
 
-        Right_Top.setDirection(DcMotor.Direction.REVERSE);
-        Right_Bottom.setDirection(DcMotor.Direction.REVERSE);
-
         loader.setDirection(DcMotorSimple.Direction.REVERSE);
+        Right_Top.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        Right_Bottom.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
         //Shooter.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+
+
     }
 }
 

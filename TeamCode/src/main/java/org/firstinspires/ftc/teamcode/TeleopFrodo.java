@@ -21,10 +21,13 @@ public class TeleopFrodo extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()){
-            //robot.Right_Top.setPower(gamepad1.right_stick_y);
-            //robot.Right_Bottom.setPower(gamepad1.right_stick_y);
-            //robot.Left_Top.setPower(gamepad1.left_stick_y);
-            //robot.Left_Bottom.setPower(gamepad1.left_stick_y);
+            robot.Right_Top.setPower(gamepad1.right_stick_y);
+            robot.Right_Bottom.setPower(gamepad1.right_stick_y);
+            robot.Left_Top.setPower(gamepad1.left_stick_y);
+            robot.Left_Bottom.setPower(gamepad1.left_stick_y);
+
+
+
 
 
             if (gamepad1.x){
@@ -42,18 +45,39 @@ public class TeleopFrodo extends LinearOpMode {
                 robot.loader.setPower(0);
 
             }
-            if (gamepad1.dpad_up){
-                position += .1;
-            }
-            if (gamepad1.dpad_down){
-                position -= .1;
-            }
-
 
             if (gamepad1.a){
+                robot.loader.setPower(-.8);
+
+            } else {
+                robot.loader.setPower(0);
+
+            }
+
+            if (gamepad1.dpad_right){
+                position += .1;
                 robot.Tilty.setPosition(position);
+                robot.Tilty2.setPosition(-position);
                 telemetry.addData("position of tilty",position);
             }
+            if (gamepad1.dpad_left){
+                position -= .1;
+                robot.Tilty.setPosition(position);
+                robot.Tilty2.setPosition(position);
+                telemetry.addData("position of tilty",position);
+            }
+
+
+
+            if (gamepad1.dpad_up){
+                robot.Finger.setPower(.3);
+            }
+            else if (gamepad1.dpad_down){
+                robot.Finger.setPower(-.3);
+            } else {
+                robot.Finger.setPower(0);
+            }
+
             while (gamepad1.right_stick_x == -1 && gamepad1.right_stick_y == 1) {
                 robot.Right_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.Left_Top.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -77,9 +101,8 @@ public class TeleopFrodo extends LinearOpMode {
                 robot.Left_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.Left_Bottom.setPower(-.6);
                 robot.Right_Top.setPower(-.6);
-
             }
-
+            //This is the Strafe
             while (gamepad1.right_stick_x == 1) {
                 robot.Right_Top.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.Right_Bottom.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
