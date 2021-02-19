@@ -1,3 +1,4 @@
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -73,6 +74,8 @@ public class LOTBAutonomousB1 extends LinearOpMode {
         robot.init(hardwareMap);
         waitForStart();
 
+        sleep(5000);
+
         double FORWARD_SPEED = 0.5;
 
 
@@ -104,6 +107,8 @@ public class LOTBAutonomousB1 extends LinearOpMode {
 
 
 
+
+
             moveTowardRings();
             sleep(2000);
             int ringCount = scanRings();
@@ -116,12 +121,12 @@ public class LOTBAutonomousB1 extends LinearOpMode {
             switch(ringCount)
             {
                 case 0:
-                    strafeLeft(15);
+                    strafeLeft(10);
                     sleep(500);
                     moveTowards(moveLength);
                     break;
                 case 1:
-                    moveLength = 53;
+                    moveLength = 49;
                     moveTowards(moveLength);
                     sleep(500);
                     strafeRight(17);
@@ -141,7 +146,7 @@ public class LOTBAutonomousB1 extends LinearOpMode {
             driveBackToShootingLine(moveLength, ringCount);
             //and if possible..
             shootRings();
-            stop();
+
         }
     }
 
@@ -283,7 +288,7 @@ public class LOTBAutonomousB1 extends LinearOpMode {
 
     private int scanRings() {
 
-        sleep(2000);
+        sleep(1000);
         int avg1 = pipeline.getAnalysis();
 
         final int FOUR_RING_THRESHOLD = 167;//150;
