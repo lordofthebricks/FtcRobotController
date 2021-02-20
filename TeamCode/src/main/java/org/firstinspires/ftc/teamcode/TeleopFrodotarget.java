@@ -14,7 +14,7 @@ import java.lang.Boolean;
 
 
 
-@TeleOp(name = "Offical teleop ")
+@TeleOp(name = "Offical teleop with target ")
 
 public class TeleopFrodotarget extends LinearOpMode {
 
