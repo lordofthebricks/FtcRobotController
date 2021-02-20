@@ -6,12 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.vars;
 import static org.firstinspires.ftc.teamcode.vars.COUNTS_PER_INCH;
-import java.lang.Boolean;
-
-
 
 
 @TeleOp(name = "Offical teleop ")
@@ -19,7 +14,6 @@ import java.lang.Boolean;
 public class TeleopFrodo extends LinearOpMode {
 
     double position;
-    boolean IsTargetModeActive = false;
 
         hardware robot = new hardware();
         private ElapsedTime runtime = new ElapsedTime();
@@ -40,19 +34,7 @@ public class TeleopFrodo extends LinearOpMode {
             robot.Left_Top.setPower(gamepad1.left_stick_y);
             robot.Left_Bottom.setPower(gamepad1.left_stick_y);
 
-            if ( gamepad1.right_trigger == 1){
-                if( IsTargetModeActive == false){
-                    IsTargetModeActive = true;
-                    telemetry.clearAll();
-                    telemetry.addLine("Targeting is now active");
-                    telemetry.update();
-                }else {
-                    IsTargetModeActive = false;
-                    telemetry.clearAll();
-                    telemetry.addLine("Targeting is no longer active");
-                    telemetry.update();
-                }
-            }
+
 
 
 
@@ -153,16 +135,7 @@ public class TeleopFrodo extends LinearOpMode {
 
 
             }
-            if (IsTargetModeActive == true){
-                if (robot.Lookie.getDistance(DistanceUnit.INCH) == 24){
 
-                    robot.Right_Top.setPower(0);
-                    robot.Right_Bottom.setPower(0);
-                    robot.Left_Top.setPower(0);
-                    robot.Left_Bottom.setPower(0);
-
-                }
-            }
 
         }
 
