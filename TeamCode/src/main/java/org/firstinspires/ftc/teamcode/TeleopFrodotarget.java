@@ -35,10 +35,10 @@ public class TeleopFrodotarget extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()){
-            robot.Right_Top.setPower(gamepad1.right_stick_y);
-            robot.Right_Bottom.setPower(gamepad1.right_stick_y);
-            robot.Left_Top.setPower(gamepad1.left_stick_y);
-            robot.Left_Bottom.setPower(gamepad1.left_stick_y);
+            robot.Right_Top.setPower(-gamepad1.right_stick_y);
+            robot.Right_Bottom.setPower(-gamepad1.right_stick_y);
+            robot.Left_Top.setPower(-gamepad1.left_stick_y);
+            robot.Left_Bottom.setPower(-gamepad1.left_stick_y);
 
             if ( gamepad1.right_trigger == 1){
                 if( IsTargetModeActive == false){
@@ -153,8 +153,8 @@ public class TeleopFrodotarget extends LinearOpMode {
 
 
             }
-            if (IsTargetModeActive == true){
-                if (robot.Lookie.getDistance(DistanceUnit.INCH) == 24){
+            while (IsTargetModeActive == true){
+                if (robot.Lookie.getDistance(DistanceUnit.INCH) <= 24){
 
                     robot.Right_Top.setPower(0);
                     robot.Right_Bottom.setPower(0);
