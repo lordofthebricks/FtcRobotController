@@ -154,7 +154,7 @@ public class TeleopFrodotarget extends LinearOpMode {
 
             }
             while (IsTargetModeActive == true){
-                if (robot.Lookie.getDistance(DistanceUnit.INCH) <= 24){
+                while (robot.Lookie.getDistance(DistanceUnit.INCH) <= 24){
 
                     robot.Right_Top.setPower(0);
                     robot.Right_Bottom.setPower(0);
