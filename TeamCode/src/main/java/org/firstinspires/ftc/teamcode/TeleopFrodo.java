@@ -13,7 +13,7 @@ import static org.firstinspires.ftc.teamcode.vars.COUNTS_PER_INCH;
 
 public class TeleopFrodo extends LinearOpMode {
 
-    double position;
+
 
         hardware robot = new hardware();
         private ElapsedTime runtime = new ElapsedTime();
@@ -63,16 +63,13 @@ public class TeleopFrodo extends LinearOpMode {
             }
 
             if (gamepad1.dpad_right){
-                position += .1;
-                robot.Tilty.setPosition(position);
-                robot.Tilty2.setPosition(-position);
-                telemetry.addData("position of tilty",position);
+
+                robot.Claw.setPosition(.1);
+
             }
             if (gamepad1.dpad_left){
-                position -= .1;
-                robot.Tilty.setPosition(position);
-                robot.Tilty2.setPosition(position);
-                telemetry.addData("position of tilty",position);
+                robot.Claw.setPosition(.9);
+
             }
 
 

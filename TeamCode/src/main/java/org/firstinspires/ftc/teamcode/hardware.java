@@ -20,6 +20,7 @@ public class hardware {
     public DcMotor Finger;
     public DistanceSensor Lookie;
     public Servo Claw;
+    public Servo Bendy;
 
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
@@ -39,6 +40,7 @@ public class hardware {
         Finger = hwMap.get(DcMotor.class,"Finger");
         Lookie = hwMap.get(DistanceSensor.class,"Lookie");
         Claw = hwMap.get(Servo.class,"Claw");
+
 
 
         Shooter.setPower(0);
