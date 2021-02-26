@@ -4,11 +4,12 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Hardware;
 
 @TeleOp(name = "SErvoTester",group = "tests")
 public class Servotesttleop extends LinearOpMode {
 
-    TestingHradware robot = new TestingHradware();
+    hardware robot = new hardware();
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
@@ -19,16 +20,18 @@ public class Servotesttleop extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()){
 
-            if (gamepad1.a); {
-                robot.Tilty.setPosition(position);
-                telemetry.addData("position of tilty:",position);
-                telemetry.update();
-            }
+
             if (gamepad1.dpad_up);{
                 position = position + 0.1;
+                robot.Claw.setPosition(position);
+                telemetry.addData("position of claw:",position);
+                telemetry.update();
             }
             if (gamepad1.dpad_down); {
                 position = position - 0.1;
+                robot.Claw.setPosition(position);
+                telemetry.addData("position of claw:",position);
+                telemetry.update();
             }
 
 

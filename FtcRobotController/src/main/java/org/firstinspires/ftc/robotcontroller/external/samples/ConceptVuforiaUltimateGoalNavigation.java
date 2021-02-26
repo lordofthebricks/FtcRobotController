@@ -26,7 +26,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
+/*
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -81,7 +81,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
  *
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
- */
+ *
 
 
 @TeleOp(name="ULTIMATEGOAL Vuforia Nav", group ="Concept")
@@ -108,7 +108,7 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
      *      ... yIgIzTqZ4mWjk9wd3cZO9T1axEqzuhxoGlfOOI2dRzKS4T0hQ8kT ...
      * Once you've obtained a license key, copy the string from the Vuforia web site
      * and paste it in to your code on the next line, between the double quotes.
-     */
+     *
     private static final String VUFORIA_KEY =
             " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
 
@@ -134,7 +134,7 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          * We can pass Vuforia the handle to a camera preview resource (on the RC phone);
          * If no camera monitor is desired, use the parameter-less constructor instead (commented out below).
-         */
+         *
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
@@ -163,11 +163,11 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
         VuforiaTrackable frontWallTarget = targetsUltimateGoal.get(4);
         frontWallTarget.setName("Front Wall Target");
 
-        // For convenience, gather together all the trackable objects in one easily-iterable collection */
+        // For convenience, gather together all the trackable objects in one easily-iterable collection *
         List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
         allTrackables.addAll(targetsUltimateGoal);
 
-        /**
+        /*
          * In order for localization to work, we need to tell the system where each target is on the field, and
          * where the phone resides on the robot.  These specifications are in the form of <em>transformation matrices.</em>
          * Transformation matrices are a central, important concept in the math here involved in localization.
@@ -183,7 +183,7 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
          *
          * Before being transformed, each target image is conceptually located at the origin of the field's
          *  coordinate system (the center of the field), facing up.
-         */
+         *
 
         //Set the position of the perimeter targets with relation to origin (center of field)
         redAllianceTarget.setLocation(OpenGLMatrix
@@ -241,7 +241,7 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
                     .translation(CAMERA_FORWARD_DISPLACEMENT, CAMERA_LEFT_DISPLACEMENT, CAMERA_VERTICAL_DISPLACEMENT)
                     .multiplied(Orientation.getRotationMatrix(EXTRINSIC, YZX, DEGREES, phoneYRotate, phoneZRotate, phoneXRotate));
 
-        /**  Let all the trackable listeners know where the phone is.  */
+        /*  Let all the trackable listeners know where the phone is.  *
         for (VuforiaTrackable trackable : allTrackables) {
             ((VuforiaTrackableDefaultListener) trackable.getListener()).setPhoneInformation(robotFromCamera, parameters.cameraDirection);
         }
@@ -299,3 +299,5 @@ public class ConceptVuforiaUltimateGoalNavigation extends LinearOpMode {
         targetsUltimateGoal.deactivate();
     }
 }
+*/
+

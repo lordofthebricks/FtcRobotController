@@ -19,6 +19,7 @@ public class hardware {
     public Servo Tilty2;
     public DcMotor Finger;
     public DistanceSensor Lookie;
+    public Servo Claw;
 
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
@@ -37,6 +38,7 @@ public class hardware {
         Tilty2 = hwMap.get(Servo.class,"Tilty2");
         Finger = hwMap.get(DcMotor.class,"Finger");
         Lookie = hwMap.get(DistanceSensor.class,"Lookie");
+        Claw = hwMap.get(Servo.class,"Claw");
 
 
         Shooter.setPower(0);
