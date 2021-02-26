@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import static org.firstinspires.ftc.teamcode.vars.COUNTS_PER_INCH;
 
 
-@TeleOp(name = "Offical teleop ")
+@TeleOp(name = "Offical teleop")
 
 public class TeleopFrodo extends LinearOpMode {
 
