@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 public class hardware {
 
@@ -15,12 +16,13 @@ public class hardware {
     public DcMotor Left_Top;
     public DcMotor Shooter;
     public DcMotor loader;
-    public Servo Tilty;
-    public Servo Tilty2;
+    public CRServo Assister;
     public DcMotor Finger;
-    //public DistanceSensor Lookie;
+
+    public DistanceSensor Lookie;
     public Servo Claw;
-    public Servo Bendy;
+    public Servo mover;
+
 
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
@@ -35,11 +37,13 @@ public class hardware {
         Left_Top = hwMap.get(DcMotor.class, "Left_Top");
         Shooter = hwMap.get(DcMotor.class,"Shooter");
         loader = hwMap.get(DcMotor.class,"Loader");
-        Tilty = hwMap.get(Servo.class,"Tilty");
-        Tilty2 = hwMap.get(Servo.class,"Tilty2");
         Finger = hwMap.get(DcMotor.class,"Finger");
-        //Lookie = hwMap.get(DistanceSensor.class,"Lookie");
+
+        Lookie = hwMap.get(DistanceSensor.class,"Lookie");
         Claw = hwMap.get(Servo.class,"Claw");
+        Assister = hwMap.get(CRServo.class,"Assister");
+        
+
 
 
 

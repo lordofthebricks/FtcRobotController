@@ -6,17 +6,23 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.vars;
 import static org.firstinspires.ftc.teamcode.vars.COUNTS_PER_INCH;
-
-
-@TeleOp(name = "Offical teleop")
-
-public class TeleopFrodo extends LinearOpMode {
+import java.lang.Boolean;
 
 
 
-    hardware robot = new hardware();
-    private ElapsedTime runtime = new ElapsedTime();
+
+@TeleOp(name = "Offical teleop with target ")
+
+public class TeleopFrodotarget extends LinearOpMode {
+
+    double position;
+    boolean IsTargetModeActive = false;
+
+        hardware robot = new hardware();
+        private ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -29,20 +35,27 @@ public class TeleopFrodo extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()){
-            robot.Right_Top.setPower(gamepad1.right_stick_y);
-            robot.Right_Bottom.setPower(gamepad1.right_stick_y);
-            robot.Left_Top.setPower(gamepad1.left_stick_y);
-            robot.Left_Bottom.setPower(gamepad1.left_stick_y);
+            robot.Right_Top.setPower(-gamepad1.right_stick_y);
+            robot.Right_Bottom.setPower(-gamepad1.right_stick_y);
+            robot.Left_Top.setPower(-gamepad1.left_stick_y);
+            robot.Left_Bottom.setPower(-gamepad1.left_stick_y);
 
-
-
-
-            if (gamepad1.right_trigger == 1){
-            robot.mover.setPosition(0.1);
+            if ( gamepad1.right_trigger == 1){
+                if( IsTargetModeActive == false){
+                    IsTargetModeActive = true;
+                    telemetry.clearAll();
+                    telemetry.addLine("Targeting is now active");
+                    telemetry.update();
+                }else {
+                    IsTargetModeActive = false;
+                    telemetry.clearAll();
+                    telemetry.addLine("Targeting is no longer active");
+                    telemetry.update();
+                }
             }
-            if (gamepad1.left_trigger == 1){
-                robot.mover.setPosition(0.9);
-            }
+
+
+
             if (gamepad1.x){
                 robot.Shooter.setPower(1);
 
@@ -53,11 +66,9 @@ public class TeleopFrodo extends LinearOpMode {
 
             if (gamepad1.y){
                 robot.loader.setPower(.8);
-                robot.Assister.setPower(.8);
 
             } else {
                 robot.loader.setPower(0);
-                robot.Assister.setPower(0);
 
             }
 
@@ -70,13 +81,16 @@ public class TeleopFrodo extends LinearOpMode {
             }
 
             if (gamepad1.dpad_right){
-
-                robot.Claw.setPosition(.1);
-
+                position += .1;
+                robot.Tilty.setPosition(position);
+                robot.Tilty2.setPosition(-position);
+                telemetry.addData("position of tilty",position);
             }
             if (gamepad1.dpad_left){
-                robot.Claw.setPosition(.9);
-
+                position -= .1;
+                robot.Tilty.setPosition(position);
+                robot.Tilty2.setPosition(position);
+                telemetry.addData("position of tilty",position);
             }
 
 
@@ -139,7 +153,16 @@ public class TeleopFrodo extends LinearOpMode {
 
 
             }
+            while (IsTargetModeActive == true){
+                while (robot.Lookie.getDistance(DistanceUnit.INCH) <= 24){
 
+                    robot.Right_Top.setPower(0);
+                    robot.Right_Bottom.setPower(0);
+                    robot.Left_Top.setPower(0);
+                    robot.Left_Bottom.setPower(0);
+
+                }
+            }
 
         }
 
