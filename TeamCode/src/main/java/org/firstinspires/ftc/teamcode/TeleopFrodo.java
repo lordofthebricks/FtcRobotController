@@ -36,7 +36,9 @@ public class TeleopFrodo extends LinearOpMode {
 
 
 
+            if (gamepad1.right_trigger){
 
+            }
 
             if (gamepad1.x){
                 robot.Shooter.setPower(1);
@@ -48,9 +50,11 @@ public class TeleopFrodo extends LinearOpMode {
 
             if (gamepad1.y){
                 robot.loader.setPower(.8);
+                robot.Assister.setPower(.8);
 
             } else {
                 robot.loader.setPower(0);
+                robot.Assister.setPower(0);
 
             }
 
