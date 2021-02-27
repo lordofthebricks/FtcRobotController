@@ -18,9 +18,12 @@ public class hardware {
     public DcMotor loader;
     public CRServo Assister;
     public DcMotor Finger;
+
     public DistanceSensor Lookie;
     public Servo Claw;
     public Servo mover;
+
+
     HardwareMap hwMap = null;
     private ElapsedTime period = new ElapsedTime();
     public hardware() {
@@ -35,9 +38,12 @@ public class hardware {
         Shooter = hwMap.get(DcMotor.class,"Shooter");
         loader = hwMap.get(DcMotor.class,"Loader");
         Finger = hwMap.get(DcMotor.class,"Finger");
+
         Lookie = hwMap.get(DistanceSensor.class,"Lookie");
         Claw = hwMap.get(Servo.class,"Claw");
         Assister = hwMap.get(CRServo.class,"Assister");
+        
+
 
 
 
@@ -58,4 +64,3 @@ public class hardware {
 
     }
 }
-

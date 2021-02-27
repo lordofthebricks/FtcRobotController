@@ -15,8 +15,8 @@ public class TeleopFrodo extends LinearOpMode {
 
 
 
-        hardware robot = new hardware();
-        private ElapsedTime runtime = new ElapsedTime();
+    hardware robot = new hardware();
+    private ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -33,6 +33,7 @@ public class TeleopFrodo extends LinearOpMode {
             robot.Right_Bottom.setPower(gamepad1.right_stick_y);
             robot.Left_Top.setPower(gamepad1.left_stick_y);
             robot.Left_Bottom.setPower(gamepad1.left_stick_y);
+
 
 
 
