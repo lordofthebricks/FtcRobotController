@@ -36,10 +36,12 @@ public class TeleopFrodo extends LinearOpMode {
 
 
 
-            if (gamepad1.right_trigger){
-
+            if (gamepad1.right_trigger == 1){
+            robot.mover.setPosition(0.1);
             }
-
+            if (gamepad1.left_trigger == 1){
+                robot.mover.setPosition(0.9);
+            }
             if (gamepad1.x){
                 robot.Shooter.setPower(1);
 
