@@ -72,51 +72,56 @@ public class LOTBAutonomousB1 extends LinearOpMode {
         });
 
         robot.init(hardwareMap);
+
+        robot.Claw.setPosition(.9);
+
         waitForStart();
 
-        sleep(5000);
+
+
+        //sleep(5000);
 
         double FORWARD_SPEED = 0.5;
 
 
 
-        while (opModeIsActive())
-        {
+        while (opModeIsActive()) {
 
-
-            /*telemetry.addData("Analysis", pipeline.getAnalysis());
-            telemetry.addData("Position", pipeline.position);
-            telemetry.update();
-
-            // Step 1:  Drive forward for 3 seconds
-            robot.Left_Bottom.setPower(FORWARD_SPEED);
-            robot.Right_Bottom.setPower(-FORWARD_SPEED);
-            robot.Right_Top.setPower(-FORWARD_SPEED);
-            robot.Left_Top.setPower(FORWARD_SPEED);
-            runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 3.0)) {
-                telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+            /*while (opModeIsActive())
+            {
+                telemetry.addData("Analysis", pipeline.getAnalysis());
+                telemetry.addData("Position", pipeline.position);
                 telemetry.update();
-            }
+
+                // Step 1:  Drive forward for 3 seconds
+                /*robot.Left_Bottom.setPower(FORWARD_SPEED);
+                robot.Right_Bottom.setPower(-FORWARD_SPEED);
+                robot.Right_Top.setPower(-FORWARD_SPEED);
+                robot.Left_Top.setPower(FORWARD_SPEED);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() < 3.0)) {
+                    telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+                    telemetry.update();
+                }
+
+            } */
+
+            //stop();
 
 
-
-            stop();
-
-             */
 
 
 
 
 
             moveTowardRings();
-            sleep(2000);
+            sleep(250);
             int ringCount = scanRings();
 
 
 
-            double moveLength = 29;
-            sleep(2000);
+            double moveLength = 57;
+
 
             switch(ringCount)
             {
@@ -126,26 +131,32 @@ public class LOTBAutonomousB1 extends LinearOpMode {
                     moveTowards(moveLength);
                     break;
                 case 1:
-                    moveLength = 49;
+                    moveLength = 78;
                     moveTowards(moveLength);
                     sleep(500);
                     strafeRight(17);
                     break;
                 default:
                     moveLength = 75;
-                    strafeLeft(15);
+                    strafeLeft(6);
                     sleep(500);
                     moveTowards(moveLength);
+                    sleep(250);
+                    encoderDriveWithoutTime(0.5,-22,22,22,-22);
+                    strafeLeft(10);
+                    encoderDriveWithoutTime(0.5,-12,-12,-12,-12);
                     break;
 
             }
             sleep(1000);
 
             dropTheGoalie();
+
             sleep(1000);
             driveBackToShootingLine(moveLength, ringCount);
             //and if possible..
-            shootRings();
+            //shootRings();
+            stop();
 
         }
     }
@@ -249,21 +260,34 @@ public class LOTBAutonomousB1 extends LinearOpMode {
         //Also, create If statement to see how far to move back relative to where you are (A box, B box, C box) )
         switch (ringCount){
             case 0:
+                strafeRight(20);
+                encoderDriveWithoutTime(0.5,22,22,22,22);
                 break;
             case 1:
                 telemetry.addData("Move Back 25 in", "");
                 telemetry.update();
-                encoderDriveWithoutTime(0.5, 20, 20, 20, 20);
+                strafeLeft(15);
+                encoderDriveWithoutTime(0.5, 40, 40, 40, 40);
+
                 break;
             default:
                 telemetry.addData("Move Back 53 in", "");
                 telemetry.update();
-                encoderDriveWithoutTime(0.5, 45, 45, 45, 45);
+                strafeRight(57);
                 break;
         }
     }
 
     private void dropTheGoalie() {
+
+        robot.Finger.setPower(-.3);
+        sleep(2000);
+        robot.Claw.setPosition(.5);
+
+        encoderDriveWithoutTime(0.5, .9,.9,.9,.9);
+
+        robot.Finger.setPower(.3);
+        robot.Claw.setPosition(-.5);
 
         //Drop the wobbly goal or (if pushing the goal) just do nothing
     }
@@ -291,8 +315,8 @@ public class LOTBAutonomousB1 extends LinearOpMode {
         sleep(1000);
         int avg1 = pipeline.getAnalysis();
 
-        final int FOUR_RING_THRESHOLD = 167;//150;
-        final int ONE_RING_THRESHOLD = 150;//135;
+        final int FOUR_RING_THRESHOLD = 160;//150;
+        final int ONE_RING_THRESHOLD = 135;//135;
 
         int ringCount = 0;
 
@@ -305,7 +329,7 @@ public class LOTBAutonomousB1 extends LinearOpMode {
         telemetry.addData("Postition", avg1);
         telemetry.addData("Ring Count:", ringCount);
         telemetry.update();
-        sleep(2000);
+       // sleep(2000);
 
         /*while (opModeIsActive())
         {
@@ -326,7 +350,7 @@ public class LOTBAutonomousB1 extends LinearOpMode {
     private void moveTowardRings() {
 
         //encoderDriveWithoutTime for around 30 inches
-        encoderDriveWithoutTime(0.5, -34, -34, -34, -34);
+        encoderDriveWithoutTime(0.5, -31, -31, -31, -31);
     }
 
 
@@ -351,13 +375,13 @@ public class LOTBAutonomousB1 extends LinearOpMode {
         /*
          * The core values which define the location and size of the sample regions
          */
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(75,68);
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(75,58);
 
-        static final int REGION_WIDTH = 45;
-        static final int REGION_HEIGHT = 33;
+        static final int REGION_WIDTH = 140;
+        static final int REGION_HEIGHT = 66;
 
-        final int FOUR_RING_THRESHOLD = 170;//150;
-        final int ONE_RING_THRESHOLD = 150;//135;
+        final int FOUR_RING_THRESHOLD = 160;//150;
+        final int ONE_RING_THRESHOLD = 135;//135;
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,
