@@ -25,6 +25,7 @@ public class TeleopFrodo extends LinearOpMode {
 
 
         boolean yFlag = false;
+        boolean aFlag = false;
 
         waitForStart();
 
@@ -55,32 +56,34 @@ public class TeleopFrodo extends LinearOpMode {
                 robot.Shooter.setPower(0);
             }
 
+            if (gamepad1.a){
+                robot.loader.setPower(-.8);
+                aFlag = true;
+            }
 
+            telemetry.addData("yFlag", "", yFlag);
+            telemetry.addData("aFlag", "", aFlag);
+            telemetry.update();
             if (gamepad1.y && !yFlag){
                 robot.loader.setPower(.8);
                 //while(gamepad1.y) {
                     robot.Assister.setPower(-1);
                 //}
                 yFlag = true;
-
-            } else if(gamepad1.y && yFlag) {
-                robot.loader.setPower(0);
-                robot.Assister.setPower(0);
-                yFlag = false;  
+                telemetry.addData("Inside if gamepad1.yFlag", "", yFlag);
+                telemetry.update();
 
             }
-
-            if (gamepad1.a){
-                robot.loader.setPower(-.8);
-                //while(gamepad1.a) {
-                    robot.Assister.setPower(1);
-                //}
-
-            } else {
+            else if(aFlag || (gamepad1.y && yFlag)) {
                 robot.loader.setPower(0);
                 robot.Assister.setPower(0);
-
+                yFlag = false;
+                telemetry.addData("Inside else gamepad1.yFlag", "", yFlag);
+                telemetry.update();
+                aFlag = false;
             }
+
+
 
             if (gamepad1.dpad_right){
 
