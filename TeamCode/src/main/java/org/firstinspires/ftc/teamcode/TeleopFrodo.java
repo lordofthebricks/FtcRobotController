@@ -24,7 +24,7 @@ public class TeleopFrodo extends LinearOpMode {
         robot.init(hardwareMap);
 
 
-
+        boolean yFlag = false;
 
         waitForStart();
 
@@ -34,14 +34,19 @@ public class TeleopFrodo extends LinearOpMode {
             robot.Left_Top.setPower(gamepad1.left_stick_y);
             robot.Left_Bottom.setPower(gamepad1.left_stick_y);
 
+            /*robot.Right_Top.setPower(-gamepad1.left_stick_y);
+            robot.Right_Bottom.setPower(-gamepad1.left_stick_y);
+            robot.Left_Top.setPower(-gamepad1.right_stick_y);
+            robot.Left_Bottom.setPower(-gamepad1.right_stick_y);*/
+
 
 
 
             if (gamepad1.right_trigger == 1){
-            robot.mover.setPosition(0.1);
+                robot.Mover.setPosition(-0.3);
             }
             if (gamepad1.left_trigger == 1){
-                robot.mover.setPosition(0.9);
+                robot.Mover.setPosition(0.9);
             }
             if (gamepad1.x){
                 robot.Shooter.setPower(1);
@@ -51,21 +56,29 @@ public class TeleopFrodo extends LinearOpMode {
             }
 
 
-            if (gamepad1.y){
+            if (gamepad1.y && !yFlag){
                 robot.loader.setPower(.8);
-                robot.Assister.setPower(.8);
+                //while(gamepad1.y) {
+                    robot.Assister.setPower(-1);
+                //}
+                yFlag = true;
 
-            } else {
+            } else if(gamepad1.y && yFlag) {
                 robot.loader.setPower(0);
                 robot.Assister.setPower(0);
+                yFlag = false;  
 
             }
 
             if (gamepad1.a){
                 robot.loader.setPower(-.8);
+                //while(gamepad1.a) {
+                    robot.Assister.setPower(1);
+                //}
 
             } else {
                 robot.loader.setPower(0);
+                robot.Assister.setPower(0);
 
             }
 
